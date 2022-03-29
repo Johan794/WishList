@@ -1,10 +1,17 @@
 import db from '../../util/database'
 
 export default function handler(req,res){
-    db.push({
-        name: "example item",
-        description: "example description"
-    })
+    const {method , body} = req;
+        if (method === "POST"){
+            db.push({
+                name: body.name,
+                description: body.description
+            })
 
-    res.redirect("http://localhost:3000/api/wishes")
+            res.send("ok");
+        }else{
+            res.status(404)
+        }
+        
+
 }
